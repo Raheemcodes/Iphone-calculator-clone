@@ -251,7 +251,7 @@ export class CalcComponent implements OnInit, AfterViewInit {
     this.startPosX = this.getPositionX(event);
     this.startPosY = this.getPositionY(event);
     this.isDragging = true;
-    this.threshold = slide.clientWidth / 10;
+    this.threshold = slide.clientWidth / 5;
   }
 
   onTouchMove(event: MouseEvent | TouchEvent) {
