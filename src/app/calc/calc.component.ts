@@ -125,8 +125,8 @@ export class CalcComponent implements OnInit, AfterViewInit {
     this.isSolving = true;
     this.isSolved = false;
 
-    if (input == '+/-') this.value = (-+this._value).toString();
-    else if (input == '%') this.value = (+this._value / 100).toString();
+    if (input == '+/-') this._value = (-+this._value).toString();
+    else if (input == '%') this._value = (+this._value / 100).toString();
   }
 
   equate() {
@@ -179,7 +179,10 @@ export class CalcComponent implements OnInit, AfterViewInit {
 
       return [input, inputArrExp[1]].join('e');
     } else if (inputArrPoint[1] != '') {
-      return this.roundUp(+input).toString();
+      if (input[0] == '-') {
+        input = input.slice(1);
+        return '-' + this.roundUp(+input).toString();
+      } else return this.roundUp(+input).toString();
     } else return input;
   }
 
