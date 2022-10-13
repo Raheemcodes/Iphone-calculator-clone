@@ -17,7 +17,7 @@ import {
 export class CalcComponent implements OnInit, AfterViewInit {
   @ViewChild('input') inputEl!: ElementRef<HTMLElement>;
   @ViewChild('container') container!: ElementRef<HTMLElement>;
-  @Input('theme') theme: 'dark' | 'light' = 'dark';
+  @Input('theme') theme!: 'dark' | 'light';
 
   highlightedBtn: HTMLButtonElement | null = null;
   isSolving: boolean = false;
