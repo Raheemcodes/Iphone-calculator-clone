@@ -1,0 +1,218 @@
+@import '../shared';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  --bg-color: #000;
+  --main-color: #fefefe;
+  --secondary-color: #040404;
+  --tertiary-color: #fff;
+  --main-btn-color: #3c3c3c;
+  --secondary-btn-color: #ff9f09;
+  --tertiary-btn-color: #a5a5a5;
+  --arithmetic-color: #fefefe;
+  --highlighted: #fefefe;
+
+  @media (prefers-color-scheme: light) {
+    --bg-color: #ffffff;
+    --main-color: #080808;
+    --secondary-color: #fefefe;
+    --tertiary-color: #080808;
+    --main-btn-color: #e0e0e0;
+    --secondary-btn-color: #ff9f09;
+    --tertiary-btn-color: #fcd609;
+    --arithmetic-color: #fefefe;
+    --highlighted: #3c3c3c;
+  }
+}
+
+.container.light-theme {
+  --bg-color: #ffffff;
+  --main-color: #080808;
+  --secondary-color: #fefefe;
+  --tertiary-color: #080808;
+  --main-btn-color: #e0e0e0;
+  --secondary-btn-color: #ff9f09;
+  --tertiary-btn-color: #fcd609;
+  --arithmetic-color: #fefefe;
+  --highlighted: #3c3c3c;
+
+  @media (prefers-color-scheme: light) {
+    --bg-color: #000;
+    --main-color: #fefefe;
+    --secondary-color: #040404;
+    --tertiary-color: #fff;
+    --main-btn-color: #3c3c3c;
+    --secondary-btn-color: #ff9f09;
+    --tertiary-btn-color: #a5a5a5;
+    --arithmetic-color: #fefefe;
+    --highlighted: #fefefe;
+  }
+}
+
+.container {
+  @include column-centered-start();
+  width: 100%;
+  min-height: 100%;
+  justify-content: flex-end;
+  background-color: var(--bg-color);
+
+  @media screen and (min-width: $md) and (min-height: $md) {
+    min-height: auto;
+    height: 100%;
+    max-width: toRem(375);
+    max-height: toRem(768);
+  }
+}
+
+.calc-container {
+  @include column-centered-start();
+  width: 100%;
+  max-width: toRem(450);
+  padding: 2rem 1rem 4rem;
+  gap: 1rem;
+  font-size: 5rem;
+
+  @media screen and (max-height: toRem(550)) {
+    max-width: toRem(275);
+    max-height: toRem(600);
+    padding: 1rem 0.5rem;
+    font-size: 4rem;
+  }
+
+  @media screen and (max-width: toRem(300)) {
+    max-width: toRem(275);
+    max-height: toRem(600);
+    padding: 1rem 0.5rem;
+    font-size: 4rem;
+  }
+}
+
+.input-control {
+  width: 100%;
+  @include display-flex();
+  align-items: flex-end;
+  flex: auto;
+  overflow-x: auto;
+}
+
+.input-field {
+  border: none;
+  width: 100%;
+  height: 7rem;
+  background-color: #0000;
+  color: var(--tertiary-color);
+  font-size: 1em;
+  font-weight: 300;
+  text-align: right;
+  outline: none;
+
+  @media screen and (max-height: toRem(550)) {
+    height: 5rem;
+  }
+  @media screen and (max-width: toRem(300)) {
+    height: 5rem;
+  }
+}
+
+.characters-container {
+  width: 100%;
+  @include display-flex();
+  flex-wrap: wrap;
+  gap: 1rem 4%;
+
+  @media screen and (max-height: toRem(550)) {
+    gap: 0.75rem 4%;
+  }
+
+  @media screen and (max-width: toRem(300)) {
+    gap: 0.75rem 4%;
+  }
+
+  @supports (display: grid) {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+
+    @media screen and (max-height: toRem(550)) {
+      gap: 0.75rem;
+    }
+    @media screen and (max-width: toRem(300)) {
+      gap: 0.75rem;
+    }
+  }
+
+  button {
+    width: 22%;
+    aspect-ratio: 1/1;
+    font-size: 2rem;
+    color: var(--main-color);
+    background-color: var(--main-btn-color);
+    border: none;
+    border-radius: 50%;
+    touch-action: manipulation;
+    outline: none;
+
+    @media screen and (max-height: toRem(550)) {
+      font-size: 1.5rem;
+    }
+    @media screen and (max-width: toRem(300)) {
+      font-size: 1.5rem;
+    }
+
+    @supports (display: grid) {
+      width: 100%;
+    }
+
+    &.special-btn {
+      font-size: 1.75rem;
+      background-color: var(--tertiary-btn-color);
+      color: var(--secondary-color);
+
+      @media screen and (max-height: toRem(550)) {
+        font-size: 1.2rem;
+      }
+      @media screen and (max-width: toRem(300)) {
+        font-size: 1.2rem;
+      }
+
+      span {
+        font-style: italic;
+      }
+    }
+
+    &.arithmetic-btn {
+      color: var(--arithmetic-color);
+      background-color: var(--secondary-btn-color);
+    }
+
+    &.zero {
+      @include centered();
+      justify-content: flex-start;
+      padding: 0 8%;
+      width: 48%;
+      border-radius: toRem(50);
+      aspect-ratio: auto;
+
+      @supports (display: grid) {
+        width: 100%;
+        padding: 0 16%;
+        grid-column: span 2;
+      }
+    }
+
+    &.highlighted,
+    &.equal:active {
+      background-color: var(--highlighted);
+      color: var(--secondary-btn-color);
+    }
+  }
+}
