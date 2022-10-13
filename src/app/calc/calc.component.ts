@@ -122,11 +122,11 @@ export class CalcComponent implements OnInit, AfterViewInit {
   }
 
   special(input: '%' | '+/-') {
-    this.isSolving = true;
-    this.isSolved = false;
-
     if (input == '+/-') this._value = (-+this._value).toString();
     else if (input == '%') this._value = (+this._value / 100).toString();
+
+    this.isSolving = false;
+    this.isSolved = true;
   }
 
   equate() {
@@ -163,13 +163,16 @@ export class CalcComponent implements OnInit, AfterViewInit {
 
   roundUp(input: number, support: number = 0): number {
     const strInput: string = input.toString().split('.')[0];
-    const toX: number = Math.pow(10, 9 - strInput.length - support);
+    const length: number = strInput.length > 9 ? 9 : strInput.length;
+    const toX: number = Math.pow(10, 9 - length - support);
 
     return Math.round(input * toX) / toX;
   }
 
   roundupExp(input: string): string {
-    if (+input > 999999999) input = (+input).toExponential();
+    if (+input > 999999999 || +input < -999999999) {
+      input = (+input).toExponential();
+    }
 
     const inputArrExp: string[] = input.split('e');
     const inputArrPoint: string[] = input.split('.');
@@ -179,10 +182,7 @@ export class CalcComponent implements OnInit, AfterViewInit {
 
       return [input, inputArrExp[1]].join('e');
     } else if (inputArrPoint[1] != '') {
-      if (input[0] == '-') {
-        input = input.slice(1);
-        return '-' + this.roundUp(+input).toString();
-      } else return this.roundUp(+input).toString();
+      return this.roundUp(+input).toString();
     } else return input;
   }
 
