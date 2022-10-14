@@ -208,7 +208,8 @@ export class CalcComponent implements OnInit, AfterViewInit {
 
   backspace() {
     if (!this.isSolved && !this.isSolving) {
-      this._value = this._value.slice(0, -1);
+      if (this._value[0] == '-' && this._value.length == 2) this._value = '0';
+      else this._value = this._value.slice(0, -1);
     }
   }
 

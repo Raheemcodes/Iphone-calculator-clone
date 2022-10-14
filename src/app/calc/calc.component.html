@@ -14,6 +14,11 @@
         type="text"
         readonly
         [value]="value"
+        (window:click)="autoShrinkFont()"
+        (window:keydown)="autoShrinkFont()"
+        (window:keypress)="autoShrinkFont()"
+        (window:keyup)="autoShrinkFont()"
+        (window:resize)="autoShrinkFont()"
       />
     </div>
 
