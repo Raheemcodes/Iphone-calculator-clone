@@ -21,7 +21,7 @@ export class CalcComponent implements OnInit, AfterViewInit {
 
   highlightedBtn: HTMLButtonElement | null = null;
   isSolving: boolean = false;
-  isSolved: boolean = false;
+  isSolved: boolean = true;
   problem: string = '';
   _value: string = '0';
   answer: string = '';
@@ -70,7 +70,10 @@ export class CalcComponent implements OnInit, AfterViewInit {
     )
       this.value = '0';
 
-    if (this._value.length >= 9) return;
+    const length: number =
+      this._value[0] == '-' ? this._value.length - 1 : this._value.length;
+
+    if (length >= 9) return;
     if (input == '.' && this.validateFullStop()) return;
 
     this._value += input;
@@ -124,9 +127,6 @@ export class CalcComponent implements OnInit, AfterViewInit {
   special(input: '%' | '+/-') {
     if (input == '+/-') this._value = (-+this._value).toString();
     else if (input == '%') this._value = (+this._value / 100).toString();
-
-    this.isSolving = false;
-    this.isSolved = true;
   }
 
   equate() {
@@ -157,7 +157,7 @@ export class CalcComponent implements OnInit, AfterViewInit {
     this.problem = '';
     this.operand = '';
     this.isSolving = false;
-    this.isSolved = false;
+    this.isSolved = true;
     this.highlightedBtn = null;
   }
 

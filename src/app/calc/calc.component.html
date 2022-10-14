@@ -20,54 +20,48 @@
     <div class="characters-container">
       <button
         #clearBtn
-        tabindex="-1"
-        (click)="highlight($event)"
-        (window:keydown.code.Control.KeyC)="
-          highlight({ currentTarget: clearBtn })
-        "
-        (window:keydown.code.Control.KeyC)="clear()"
-        (click)="clear()"
         class="special-btn"
+        tabindex="-1"
+        (click)="highlight($event); clear()"
+        (window:keydown.code.Control.KeyC)="
+          highlight({ currentTarget: clearBtn }); clear()
+        "
       >
-        {{ +_value > 0 ? 'C' : 'AC' }}
+        {{ !isSolving && !isSolved ? 'C' : 'AC' }}
       </button>
 
       <button
         #quote
-        tabindex="-1"
-        (click)="highlight($event)"
-        (window:keydown.code.Shift.Backquote)="
-          highlight({ currentTarget: quote })
-        "
-        (window:keydown.code.Shift.Backquote)="special('+/-')"
-        (click)="special('+/-')"
         class="special-btn"
+        tabindex="-1"
+        (click)="highlight($event); special('+/-')"
+        (window:keydown.code.Shift.Backquote)="
+          highlight({ currentTarget: quote }); special('+/-')
+        "
       >
         <sup>+</sup><span>/</span><sub>-</sub>
       </button>
 
       <button
         #shift5
-        tabindex="-1"
-        (click)="highlight($event)"
-        (window:keydown.code.Shift.Digit5)="
-          highlight({ currentTarget: shift5 })
-        "
-        (window:keydown.code.Shift.Digit5)="special('%')"
-        (click)="special('%')"
         class="special-btn"
+        tabindex="-1"
+        (click)="highlight($event); special('%')"
+        (window:keydown.code.Shift.Digit5)="
+          highlight({ currentTarget: shift5 }); special('%')
+        "
       >
         %
       </button>
 
       <button
         #div
-        tabindex="-1"
-        (click)="highlight($event)"
-        (window:keydown.code.Slash)="highlight({ currentTarget: div })"
-        (window:keydown.code.Slash)="arithmetic('/')"
         class="arithmetic-btn"
-        (click)="arithmetic('/')"
+        tabindex="-1"
+        (click)="highlight($event); arithmetic('/')"
+        (window:keydown.code.Slash)="
+          highlight({ currentTarget: div }); arithmetic('/')
+        "
       >
         &div;
       </button>
@@ -75,10 +69,10 @@
       <button
         #seven
         tabindex="-1"
-        (click)="highlight($event)"
-        (window:keydown.code.Digit7)="highlight({ currentTarget: seven })"
-        (window:keydown.code.Digit7)="value = '7'"
-        (click)="value = '7'"
+        (click)="highlight($event); value = '7'"
+        (window:keydown.code.Digit7)="
+          highlight({ currentTarget: seven }); value = '7'
+        "
       >
         7
       </button>
@@ -86,10 +80,10 @@
       <button
         #eight
         tabindex="-1"
-        (window:keydown.code.Digit8)="highlight({ currentTarget: eight })"
-        (window:keydown.code.Digit8)="value = '8'"
-        (click)="highlight($event)"
-        (click)="value = '8'"
+        (click)="highlight($event); value = '8'"
+        (window:keydown.code.Digit8)="
+          highlight({ currentTarget: eight }); value = '8'
+        "
       >
         8
       </button>
@@ -97,22 +91,22 @@
       <button
         #nine
         tabindex="-1"
-        (window:keydown.code.Digit9)="highlight({ currentTarget: nine })"
-        (window:keydown.code.Digit9)="value = '9'"
-        (click)="highlight($event)"
-        (click)="value = '9'"
+        (click)="highlight($event); value = '9'"
+        (window:keydown.code.Digit9)="
+          highlight({ currentTarget: nine }); value = '9'
+        "
       >
         9
       </button>
 
       <button
         #mul
-        tabindex="-1"
         class="arithmetic-btn"
-        (click)="highlight($event)"
-        (window:keydown.code.Shift.Digit8)="highlight({ currentTarget: mul })"
-        (window:keydown.code.Shift.Digit8)="arithmetic('*')"
-        (click)="arithmetic('*')"
+        tabindex="-1"
+        (click)="highlight($event); arithmetic('*')"
+        (window:keydown.code.Shift.Digit8)="
+          highlight({ currentTarget: mul }); arithmetic('*')
+        "
       >
         &times;
       </button>
@@ -120,10 +114,10 @@
       <button
         #four
         tabindex="-1"
-        (click)="highlight($event)"
-        (window:keydown.code.Digit4)="highlight({ currentTarget: four })"
-        (window:keydown.code.Digit4)="value = '4'"
-        (click)="value = '4'"
+        (click)="highlight($event); value = '4'"
+        (window:keydown.code.Digit4)="
+          highlight({ currentTarget: four }); value = '4'
+        "
       >
         4
       </button>
@@ -131,10 +125,10 @@
       <button
         #five
         tabindex="-1"
-        (click)="highlight($event)"
-        (window:keydown.code.Digit5)="highlight({ currentTarget: five })"
-        (window:keydown.code.Digit5)="value = '5'"
-        (click)="value = '5'"
+        (click)="highlight($event); value = '5'"
+        (window:keydown.code.Digit5)="
+          highlight({ currentTarget: five }); value = '5'
+        "
       >
         5
       </button>
@@ -142,10 +136,10 @@
       <button
         #six
         tabindex="-1"
-        (click)="highlight($event)"
-        (window:keydown.code.Digit6)="highlight({ currentTarget: six })"
-        (window:keydown.code.Digit6)="value = '6'"
-        (click)="value = '6'"
+        (click)="highlight($event); value = '6'"
+        (window:keydown.code.Digit6)="
+          highlight({ currentTarget: six }); value = '6'
+        "
       >
         6
       </button>
@@ -154,10 +148,10 @@
         #minus
         tabindex="-1"
         class="arithmetic-btn"
-        (click)="highlight($event)"
-        (window:keydown.code.Minus)="highlight({ currentTarget: minus })"
-        (window:keydown.code.Minus)="arithmetic('-')"
-        (click)="arithmetic('-')"
+        (click)="highlight($event); arithmetic('-')"
+        (window:keydown.code.Minus)="
+          highlight({ currentTarget: minus }); arithmetic('-')
+        "
       >
         &minus;
       </button>
@@ -165,10 +159,10 @@
       <button
         #one
         tabindex="-1"
-        (click)="highlight($event)"
-        (window:keydown.code.Digit1)="highlight({ currentTarget: one })"
-        (window:keydown.code.Digit1)="value = '1'"
-        (click)="value = '1'"
+        (click)="highlight($event); value = '1'"
+        (window:keydown.code.Digit1)="
+          highlight({ currentTarget: one }); value = '1'
+        "
       >
         1
       </button>
@@ -176,10 +170,10 @@
       <button
         #two
         tabindex="-1"
-        (click)="highlight($event)"
-        (window:keydown.code.Digit2)="highlight({ currentTarget: two })"
-        (window:keydown.code.Digit2)="value = '2'"
-        (click)="value = '2'"
+        (click)="highlight($event); value = '2'"
+        (window:keydown.code.Digit2)="
+          highlight({ currentTarget: two }); value = '2'
+        "
       >
         2
       </button>
@@ -187,10 +181,10 @@
       <button
         #three
         tabindex="-1"
-        (click)="highlight($event)"
-        (window:keydown.code.Digit3)="highlight({ currentTarget: three })"
-        (window:keydown.code.Digit3)="value = '3'"
-        (click)="value = '3'"
+        (click)="highlight($event); value = '3'"
+        (window:keydown.code.Digit3)="
+          highlight({ currentTarget: three }); value = '3'
+        "
       >
         3
       </button>
@@ -199,10 +193,10 @@
         #plus
         tabindex="-1"
         class="arithmetic-btn"
-        (click)="highlight($event)"
-        (window:keydown.code.Shift.Equal)="arithmetic('+')"
-        (window:keydown.code.Shift.Equal)="highlight({ currentTarget: plus })"
-        (click)="arithmetic('+')"
+        (click)="highlight($event); arithmetic('+')"
+        (window:keydown.code.Shift.Equal)="
+          highlight({ currentTarget: plus }); arithmetic('+')
+        "
       >
         +
       </button>
@@ -210,10 +204,10 @@
       <button
         #zero
         tabindex="-1"
-        (click)="highlight($event)"
-        (window:keydown.code.Digit0)="highlight({ currentTarget: zero })"
-        (window:keydown.code.Digit0)="value = '0'"
-        (click)="value = '0'"
+        (click)="highlight($event); value = '0'"
+        (window:keydown.code.Digit0)="
+          highlight({ currentTarget: zero }); value = '0'
+        "
         class="zero"
       >
         0
@@ -222,10 +216,10 @@
       <button
         #period
         tabindex="-1"
-        (click)="highlight($event)"
-        (window:keydown.code.Period)="highlight({ currentTarget: period })"
-        (window:keydown.code.Period)="value = '.'"
-        (click)="value = '.'"
+        (click)="highlight($event); value = '.'"
+        (window:keydown.code.Period)="
+          highlight({ currentTarget: period }); value = '.'
+        "
       >
         .
       </button>
@@ -233,13 +227,14 @@
       <button
         #equal
         tabindex="-1"
-        (click)="highlight($event)"
         class="arithmetic-btn equal"
-        (window:keydown.code.Enter)="highlight({ currentTarget: equal })"
-        (window:keydown.code.Equal)="highlight({ currentTarget: equal })"
-        (window:keydown.code.Enter)="equate()"
-        (window:keydown.code.Equal)="equate()"
-        (click)="equate()"
+        (click)="highlight($event); equate()"
+        (window:keydown.code.Enter)="
+          highlight({ currentTarget: equal }); equate()
+        "
+        (window:keydown.code.Equal)="
+          highlight({ currentTarget: equal }); equate()
+        "
       >
         =
       </button>
