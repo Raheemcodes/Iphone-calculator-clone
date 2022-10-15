@@ -1,0 +1,211 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap");
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  margin: 0;
+  padding: 0; }
+
+.container {
+  --bg-color: #000;
+  --main-color: #fefefe;
+  --secondary-color: #040404;
+  --tertiary-color: #fff;
+  --main-btn-color: #3c3c3c;
+  --secondary-btn-color: #ff9f09;
+  --tertiary-btn-color: #a5a5a5;
+  --arithmetic-color: #fefefe;
+  --highlighted: #fefefe; }
+  @media (prefers-color-scheme: light) {
+    .container {
+      --bg-color: #ffffff;
+      --main-color: #080808;
+      --secondary-color: #fefefe;
+      --tertiary-color: #080808;
+      --main-btn-color: #e0e0e0;
+      --secondary-btn-color: #ff9f09;
+      --tertiary-btn-color: #fcd609;
+      --arithmetic-color: #fefefe;
+      --highlighted: #3c3c3c; } }
+
+.container.light-theme {
+  --bg-color: #ffffff;
+  --main-color: #080808;
+  --secondary-color: #fefefe;
+  --tertiary-color: #080808;
+  --main-btn-color: #e0e0e0;
+  --secondary-btn-color: #ff9f09;
+  --tertiary-btn-color: #fcd609;
+  --arithmetic-color: #fefefe;
+  --highlighted: #3c3c3c; }
+  @media (prefers-color-scheme: light) {
+    .container.light-theme {
+      --bg-color: #000;
+      --main-color: #fefefe;
+      --secondary-color: #040404;
+      --tertiary-color: #fff;
+      --main-btn-color: #3c3c3c;
+      --secondary-btn-color: #ff9f09;
+      --tertiary-btn-color: #a5a5a5;
+      --arithmetic-color: #fefefe;
+      --highlighted: #fefefe; } }
+
+.container {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+  justify-content: flex-end;
+  background-color: var(--bg-color); }
+  @media screen and (min-width: 48rem) and (min-height: 48rem) {
+    .container {
+      min-height: auto;
+      height: 100%;
+      max-width: 23.4375rem;
+      max-height: 48rem; } }
+
+.calc-container {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  max-width: 28.125rem;
+  padding: 2rem 1rem 4rem;
+  gap: 1rem;
+  font-size: 5rem; }
+  @media screen and (max-height: 34.375rem) {
+    .calc-container {
+      max-width: 17.1875rem;
+      max-height: 37.5rem;
+      padding: 1rem 0.5rem;
+      font-size: 4rem; } }
+  @media screen and (max-width: 18.75rem) {
+    .calc-container {
+      max-width: 17.1875rem;
+      max-height: 37.5rem;
+      padding: 1rem 0.5rem;
+      font-size: 4rem; } }
+
+.input-control {
+  width: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: flex-end;
+  flex: auto;
+  overflow-x: auto; }
+
+.input-field {
+  border: none;
+  width: 100%;
+  height: 7rem;
+  background-color: #0000;
+  color: var(--tertiary-color);
+  font-size: 1em;
+  font-weight: 300;
+  text-align: right;
+  outline: none; }
+  @media screen and (max-height: 34.375rem) {
+    .input-field {
+      height: 5rem; } }
+  @media screen and (max-width: 18.75rem) {
+    .input-field {
+      height: 5rem; } }
+
+.characters-container {
+  width: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 4%; }
+  @media screen and (max-height: 34.375rem) {
+    .characters-container {
+      gap: 0.75rem 4%; } }
+  @media screen and (max-width: 18.75rem) {
+    .characters-container {
+      gap: 0.75rem 4%; } }
+  @supports (display: grid) {
+    .characters-container {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem; }
+      @media screen and (max-height: 34.375rem) {
+        .characters-container {
+          gap: 0.75rem; } }
+      @media screen and (max-width: 18.75rem) {
+        .characters-container {
+          gap: 0.75rem; } } }
+  .characters-container button {
+    width: 22%;
+    aspect-ratio: 1/1;
+    font-size: 2rem;
+    color: var(--main-color);
+    background-color: var(--main-btn-color);
+    border: none;
+    border-radius: 50%;
+    touch-action: manipulation;
+    outline: none; }
+    @media screen and (max-height: 34.375rem) {
+      .characters-container button {
+        font-size: 1.5rem; } }
+    @media screen and (max-width: 18.75rem) {
+      .characters-container button {
+        font-size: 1.5rem; } }
+    @supports (display: grid) {
+      .characters-container button {
+        width: 100%; } }
+    .characters-container button.special-btn {
+      font-size: 1.75rem;
+      background-color: var(--tertiary-btn-color);
+      color: var(--secondary-color); }
+      @media screen and (max-height: 34.375rem) {
+        .characters-container button.special-btn {
+          font-size: 1.2rem; } }
+      @media screen and (max-width: 18.75rem) {
+        .characters-container button.special-btn {
+          font-size: 1.2rem; } }
+      .characters-container button.special-btn span {
+        font-style: italic; }
+    .characters-container button.arithmetic-btn {
+      color: var(--arithmetic-color);
+      background-color: var(--secondary-btn-color); }
+    .characters-container button.zero {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 8%;
+      width: 48%;
+      border-radius: 3.125rem;
+      aspect-ratio: auto; }
+      @supports (display: grid) {
+        .characters-container button.zero {
+          width: 100%;
+          padding: 0 16%;
+          grid-column: span 2; } }
+    .characters-container button.highlighted, .characters-container button.equal:active {
+      background-color: var(--highlighted);
+      color: var(--secondary-btn-color); }
+
+/*# sourceMappingURL=calc.css.map */
