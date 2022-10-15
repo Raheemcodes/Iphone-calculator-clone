@@ -59,11 +59,11 @@
 }
 
 .container {
-  @include column-centered-start();
+  @include centered();
+  align-items: flex-end;
+  background-color: var(--bg-color);
   width: 100%;
   min-height: 100%;
-  justify-content: flex-end;
-  background-color: var(--bg-color);
 
   @media screen and (min-width: $md) and (min-height: $md) {
     min-height: auto;
@@ -75,7 +75,9 @@
 
 .calc-container {
   @include column-centered-start();
+  background-color: var(--bg-color);
   width: 100%;
+  height: 100%;
   max-width: toRem(450);
   padding: 2rem 1rem 4rem;
   gap: 1rem;
