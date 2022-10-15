@@ -54,7 +54,7 @@ export class CalcComponent implements OnInit, AfterViewInit {
     }
   }
 
-  get value() {
+  get value(): string {
     if (this.inputEl) this.autoShrinkFont();
 
     return this.format(this._value);
@@ -64,11 +64,7 @@ export class CalcComponent implements OnInit, AfterViewInit {
     if (this.isSolved || this.isSolving || (this._value == '0' && input != '.'))
       this._value = '';
 
-    if (
-      (input == '.' && this.value == '') ||
-      (input == '.' && this.value == '0')
-    )
-      this.value = '0';
+    if (input == '.' && this._value == '') this.value = '0';
 
     const length: number =
       this._value[0] == '-' ? this._value.length - 1 : this._value.length;
@@ -94,11 +90,10 @@ export class CalcComponent implements OnInit, AfterViewInit {
   }
 
   noCommas(input: string, exception: string): string {
-    let inputArr: string[];
-    inputArr = input.split(exception);
-    input = this.handleCommas(inputArr[0]);
+    const [preSymbol, exSymbol] = input.split(exception);
+    input = this.handleCommas(preSymbol);
 
-    return [input, inputArr[1]].join(exception);
+    return [input, exSymbol].join(exception);
   }
 
   handleCommas(input: string): string {
@@ -174,14 +169,14 @@ export class CalcComponent implements OnInit, AfterViewInit {
       input = (+input).toExponential();
     }
 
-    const inputArrExp: string[] = input.split('e');
+    const [BEFORE_E, AFTER_E]: string[] = input.split('e');
     const inputArrPoint: string[] = input.split('.');
 
     if (input.includes('e')) {
-      input = this.roundUp(+inputArrExp[0], inputArrExp[1].length).toString();
+      input = this.roundUp(+BEFORE_E, AFTER_E.length).toString();
 
-      return [input, inputArrExp[1]].join('e');
-    } else if (inputArrPoint[1] != '') {
+      return [input, AFTER_E].join('e');
+    } else if (inputArrPoint[1] != '' && input.length > 9) {
       return this.roundUp(+input).toString();
     } else return input;
   }
@@ -231,6 +226,8 @@ export class CalcComponent implements OnInit, AfterViewInit {
       this.highlightedBtn = curBtn;
       curBtn.classList.add('highlighted');
     }
+
+    if (curBtn.classList.contains('equal')) this.highlightedBtn = null;
   }
 
   reHighLight() {

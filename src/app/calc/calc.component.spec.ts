@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
 import { CalcComponent } from './calc.component';
 
 describe('CalcComponent', () => {
@@ -22,25 +21,175 @@ describe('CalcComponent', () => {
   });
 
   describe('ngAfterViewInit()', () => {
-    it('container Element should not have class light-theme', () => {
-      const prefersDarkScheme = window.matchMedia(
-        '(prefers-color-scheme: dark)'
-      );
+    it('container Element should not have class light-theme by default', () => {
       const containerEl: HTMLElement = fixture.debugElement.query(
         By.css('.container')
       ).nativeElement;
 
-      if (prefersDarkScheme.matches) {
-        expect(containerEl.classList.contains('light-theme'))
-          .withContext('dark mode')
-          .toBeFalse();
-      } else {
-        expect(containerEl.classList.contains('light-theme'))
-          .withContext('light mode')
-          .toBeFalse();
-      }
+      spyOn(window, 'matchMedia').and.returnValue({
+        matches: true,
+      } as any);
+
+      expect(containerEl.classList.contains('light-theme'))
+        .withContext('matches OS theme')
+        .toBeFalse();
     });
 
-    // it('container Element should have class light-theme', () => {});
+    it('container Element should not have class light-theme by default', () => {
+      const containerEl: HTMLElement = fixture.debugElement.query(
+        By.css('.container')
+      ).nativeElement;
+
+      spyOn(window, 'matchMedia').and.returnValue({
+        matches: false,
+      } as any);
+
+      expect(containerEl.classList.contains('light-theme'))
+        .withContext('not matches OS theme')
+        .toBeFalse();
+    });
+
+    it('container Element should have class light-theme', () => {
+      component.theme = 'light';
+      const containerEl: HTMLElement = fixture.debugElement.query(
+        By.css('.container')
+      ).nativeElement;
+
+      spyOn(window, 'matchMedia').and.returnValue({
+        matches: true,
+      } as any);
+
+      component.ngAfterViewInit();
+
+      expect(containerEl.classList.contains('light-theme'))
+        .withContext('theme is light and OS theme is dark')
+        .toBeTrue();
+    });
+
+    it('container Element should have class light-theme', () => {
+      component.theme = 'light';
+      const containerEl: HTMLElement = fixture.debugElement.query(
+        By.css('.container')
+      ).nativeElement;
+
+      spyOn(window, 'matchMedia').and.returnValue({
+        matches: false,
+      } as any);
+
+      component.ngAfterViewInit();
+
+      expect(containerEl.classList.contains('light-theme'))
+        .withContext('theme is light and OS theme is light')
+        .toBeFalse();
+    });
+
+    it('container Element should have class light-theme', () => {
+      component.theme = 'dark';
+      const containerEl: HTMLElement = fixture.debugElement.query(
+        By.css('.container')
+      ).nativeElement;
+
+      spyOn(window, 'matchMedia').and.returnValue({
+        matches: true,
+      } as any);
+
+      component.ngAfterViewInit();
+
+      expect(containerEl.classList.contains('light-theme'))
+        .withContext('theme is dark and OS theme is light')
+        .toBeTrue();
+    });
+
+    it('container Element should have class light-theme', () => {
+      component.theme = 'dark';
+      const containerEl: HTMLElement = fixture.debugElement.query(
+        By.css('.container')
+      ).nativeElement;
+
+      spyOn(window, 'matchMedia').and.returnValue({
+        matches: false,
+      } as any);
+
+      component.ngAfterViewInit();
+
+      expect(containerEl.classList.contains('light-theme'))
+        .withContext('theme is dark and OS theme is dark')
+        .toBeFalse();
+    });
+  });
+
+  describe('getter value()', () => {
+    it('should call autoShrink() if inputEl is true', () => {
+      component.inputEl = fixture.debugElement.query(By.css('.input-field'));
+      const autoShrink: jasmine.Spy = spyOn(component, 'autoShrinkFont');
+
+      component.value;
+
+      expect(autoShrink).toHaveBeenCalled();
+    });
+
+    it('should call autoShrink() if inputEl is true', () => {
+      const autoShrink: jasmine.Spy = spyOn(component, 'autoShrinkFont');
+      component.inputEl = null!;
+
+      component.value;
+
+      expect(autoShrink).not.toHaveBeenCalled();
+    });
+
+    it('should call format()', () => {
+      const format: jasmine.Spy = spyOn(component, 'format');
+
+      component.value;
+
+      expect(format).toHaveBeenCalled();
+    });
+  });
+
+  describe('setter value()', () => {
+    it('should change value to new input if', () => {
+      component.isSolved = true;
+      component.isSolved = false;
+      component.value = '7';
+      expect(component.value).withContext('isSolved is true').toBe('7');
+
+      component.isSolved = false;
+      component.isSolving = true;
+      component.value = '7';
+      expect(component.value).withContext('isSolving is true').toBe('7');
+
+      component.isSolved = false;
+      component.isSolving = false;
+      component._value = '0';
+      component.value = '7';
+      expect(component.value).withContext('isSolving is true').toBe('7');
+    });
+
+    it('should change value to concat', () => {
+      component.isSolved = false;
+      component.isSolved = false;
+      component.value = '7';
+      expect(component.value).withContext('isSolved is true').toBe('7');
+
+      component.isSolved = false;
+      component.isSolving = false;
+      component.value = '7';
+      expect(component.value).withContext('isSolving is true').toBe('77');
+
+      component.isSolved = false;
+      component.isSolving = false;
+      component._value = '0';
+      component.value = '.';
+      expect(component.value).withContext('isSolving is true').toBe('0.');
+    });
+
+    it('should change value to 0 if input is . and value is ""', () => {});
+    // it('should call validateFullstop()', () => {
+    //   const validate: jasmine.Spy = spyOn(component, 'validateFullStop');
+
+    //   component.value = '.';
+
+    //   expect(validate).toHaveBeenCalled();
+    // });
   });
 });

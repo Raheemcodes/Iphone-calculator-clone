@@ -235,7 +235,7 @@
         class="arithmetic-btn equal"
         (click)="highlight($event); equate()"
         (window:keydown.code.Enter)="
-          highlight({ currentTarget: equal }); equate()
+          $event.preventDefault(); highlight({ currentTarget: equal }); equate()
         "
         (window:keydown.code.Equal)="
           highlight({ currentTarget: equal }); equate()

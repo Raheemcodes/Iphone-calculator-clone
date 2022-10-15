@@ -6,7 +6,7 @@ import { CalcComponent } from './calc/calc.component';
 @NgModule({
   declarations: [CalcComponent],
   imports: [BrowserModule],
-  providers: [],
+  providers: [{ provide: Window, useValue: window }],
   entryComponents: [CalcComponent],
 })
 export class AppModule implements DoBootstrap {
