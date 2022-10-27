@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/iphone-calculator",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
