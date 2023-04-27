@@ -65,7 +65,7 @@
   justify-content: flex-end;
   background-color: var(--bg-color);
 
-  @media screen and (min-height: $md) {
+  @media screen and (min-width: $sm) {
     max-width: toRem(375);
     max-height: toRem(768);
   }
@@ -86,12 +86,12 @@
     font-size: 4rem;
   }
 
-  @media screen and (max-width: toRem(300)) {
-    max-width: toRem(275);
-    max-height: toRem(600);
-    padding: 1rem 0.5rem;
-    font-size: 4rem;
-  }
+  // @media screen and (max-width: toRem(300)) {
+  //   max-width: toRem(275);
+  //   max-height: toRem(600);
+  //   padding: 1rem 0.5rem;
+  //   font-size: 4rem;
+  // }
 }
 
 .input-control {
